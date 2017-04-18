@@ -5,11 +5,20 @@ int val;
 int offset=98;
 int left_val = offset-10;
 int rigth_val = offset+10;
+
+// モーター制御
+const int motorA = 5;
+const int motorB = 6;
+const int PWM_mot = 4;
+
 void setup()
 {
   Serial.begin(9600);  
   servo0.attach(9);
   servo0.write(offset);
+
+  pinMode(motorA,OUTPUT); //信号用ピン
+  pinMode(motorB,OUTPUT); //信号用ピン
 }
 
 void loop()
@@ -24,13 +33,18 @@ void loop()
       //break;
       
       case 49:
-      servo0.write(110);
-      delay(100);
+      //servo0.write(110);
+      digitalWrite(motorA,LOW);
+      digitalWrite(motorB,LOW);
+      delay(1000);
       break;
       
       case 50:
-      servo0.write(70);
-      delay(100);
+      //servo0.write(70);
+      digitalWrite(motorA,HIGH);
+      digitalWrite(motorB,LOW);
+      analogWrite(PWM_mot,150); 
+      delay(1000);
       break;
       
       case 113://q:left
